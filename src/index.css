@@ -60,3 +60,7 @@ input[type="number"] {
   color: var(--primary) !important;
   background-color: transparent !important;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

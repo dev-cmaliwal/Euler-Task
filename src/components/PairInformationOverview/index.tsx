@@ -8,6 +8,14 @@ import { PairData } from "../../interfaces";
 import { useStyles } from "./styles";
 import { PRECISION_VALUE } from "../../constants";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 interface Props {
   data: PairData | undefined;
 }
@@ -19,62 +27,77 @@ const PairOverview: React.FC<Props> = ({ data }) => {
       {data ? (
         <List>
           <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>Token 1 Name:</Typography>
-            <Typography className={styles.listDesc}>
-              {data?.token0?.name}
-            </Typography>
+            <TableContainer component={Paper} className={styles.tableContainer}>
+              <Table aria-label="Pair Information Table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Token No</TableCell>
+                    <TableCell align="center">Token Name</TableCell>
+                    <TableCell align="center">Token Symbol</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row" align="center">
+                      1
+                    </TableCell>
+                    <TableCell align="center">{data?.token0?.name}</TableCell>
+                    <TableCell align="center">{data?.token0?.symbol}</TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row" align="center">
+                      2
+                    </TableCell>
+                    <TableCell align="center">{data?.token1?.name}</TableCell>
+                    <TableCell align="center">{data?.token1?.symbol}</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
           </ListItem>
           <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>
-              Token 1 symbol:
-            </Typography>
-            <Typography className={styles.listDesc}>
-              {data?.token0?.symbol}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>Token 2 Name:</Typography>
-            <Typography className={styles.listDesc}>
-              {data.token1.name}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>
-              Token 2 Symbol:
-            </Typography>
-            <Typography className={styles.listDesc}>
-              {data.token1.symbol}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>
-              Reserved In ETH:
-            </Typography>
-            <Typography className={styles.listDesc}>
-              {parseFloat(data.reserveETH).toFixed(PRECISION_VALUE)}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>
-              Reserved in USD:
-            </Typography>
-            <Typography className={styles.listDesc}>
-              {parseFloat(data.reserveUSD).toFixed(PRECISION_VALUE)}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>Total Supply:</Typography>
-            <Typography className={styles.listDesc}>
-              {parseFloat(data.totalSupply).toFixed(PRECISION_VALUE)}
-            </Typography>
-          </ListItem>
-          <ListItem className={styles.listContainer}>
-            <Typography className={styles.listTitle}>
-              Total Volume in USD:
-            </Typography>
-            <Typography className={styles.listDesc}>
-              {parseFloat(data.volumeUSD).toFixed(PRECISION_VALUE)}
-            </Typography>
+            <TableContainer component={Paper} className={styles.tableContainer}>
+              <Table aria-label="Pair Information Table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">Reserved In ETH:</TableCell>
+                    <TableCell align="left">
+                      {parseFloat(data.reserveETH).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Reserved In USD:</TableCell>
+                    <TableCell align="left">
+                      {parseFloat(data.reserveUSD).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Total Supply:</TableCell>
+                    <TableCell align="left">
+                      {parseFloat(data.totalSupply).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Total Volume in USD:</TableCell>
+                    <TableCell align="left">
+                      {parseFloat(data.volumeUSD).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
           </ListItem>
         </List>
       ) : (

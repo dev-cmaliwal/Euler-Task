@@ -31,7 +31,6 @@ const PairInformationGraph: React.FC<Props> = ({ data }) => {
             value: parseFloat(item.dailyVolumeUSD),
           };
         })
-        .filter((item, index) => index % 7 === 0)
         .reverse(),
     [data]
   );

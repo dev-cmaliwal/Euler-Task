@@ -2,7 +2,7 @@ import { Theme, makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme: Theme) => ({
   pastSwapsContainer: {
-    height: "500px",
+    height: "630px",
     overflowY: "auto",
   },
   listContainer: {
@@ -35,5 +35,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     width: "100%",
     height: "360px",
+  },
+  tableContainer: {
+    backgroundColor: "var(--secondary) !important",
+    backgroundImage: "none !important",
+    marginBottom: "25px",
+    marginTop: "25px",
   },
 }));

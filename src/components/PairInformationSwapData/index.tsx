@@ -7,6 +7,14 @@ import { PastSwap } from "../../interfaces";
 import { useStyles } from "./styles";
 import { PRECISION_VALUE } from "../../constants";
 
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 interface Props {
   data: Array<PastSwap>;
 }
@@ -15,58 +23,59 @@ const PastSwaps: React.FC<Props> = ({ data }) => {
   const styles = useStyles();
   const totalSwapData = data ? [...data] : [];
   const swapData = totalSwapData.splice(0, 50);
+
   return (
     <Box className={styles.pastSwapsContainer}>
       {swapData.length > 0 ? (
-        swapData.map((item, index) => (
-          <React.Fragment key={item.id}>
-            <Box className={styles.listContainer}>
-              <Box className={styles.listContent}>
-                <Typography className={styles.listContentTitle}>
-                  Sender:
-                </Typography>
-                <Typography className={styles.listContentDesc}>
-                  {item.sender}
-                </Typography>
-              </Box>
-              <Box className={styles.listContent}>
-                <Typography
-                  className={styles.listContentTitle}
-                  variant="subtitle2"
-                >
-                  Reciever:
-                </Typography>
-                <Typography className={styles.listContentDesc}>
-                  {item.to}
-                </Typography>
-              </Box>
-              <Box className={styles.listContent}>
-                <Typography
-                  className={styles.listContentTitle}
-                  variant="subtitle2"
-                >
-                  Amount In:
-                </Typography>
-                <Typography className={styles.listContentDesc}>
-                  {!item.amount1In
-                    ? parseFloat(item.amount0In).toFixed(PRECISION_VALUE)
-                    : parseFloat(item.amount1In).toFixed(PRECISION_VALUE)}
-                </Typography>
-              </Box>
-              <Box className={styles.listContent}>
-                <Typography
-                  className={styles.listContentTitle}
-                  variant="subtitle2"
-                >
-                  Amount Out:
-                </Typography>
-                <Typography className={styles.listContentDesc}>
-                  {!item.amount1Out
-                    ? parseFloat(item.amount0Out).toFixed(PRECISION_VALUE)
-                    : parseFloat(item.amount1Out).toFixed(PRECISION_VALUE)}
-                </Typography>
-              </Box>
-            </Box>
+        swapData.map((swap, index) => (
+          <React.Fragment key={swap.id}>
+            <TableContainer
+              component={Paper}
+              className={styles.tableContainer + " cursor-pointer"}
+              onClick={() =>
+                window.open(
+                  `https://etherscan.io/tx/${swap.id.split("-")[0]}`,
+                  `_blank`
+                )
+              }
+            >
+              <Table aria-label="Pair Information Table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">Sender:</TableCell>
+                    <TableCell align="left">{swap.sender}</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Reciever:</TableCell>
+                    <TableCell align="left">{swap.to}</TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Amount In:</TableCell>
+                    <TableCell align="left">
+                      {!swap.amount1In
+                        ? parseFloat(swap.amount0In).toFixed(PRECISION_VALUE)
+                        : parseFloat(swap.amount1In).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="left">Amount Out:</TableCell>
+                    <TableCell align="left">
+                      {!swap.amount1Out
+                        ? parseFloat(swap.amount0Out).toFixed(PRECISION_VALUE)
+                        : parseFloat(swap.amount1Out).toFixed(PRECISION_VALUE)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
             <Divider />
           </React.Fragment>
         ))

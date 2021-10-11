@@ -4,4 +4,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   tabPanel: {
     overflow: "auto",
   },
+  container: {
+    height: "100%",
+  },
 }));
