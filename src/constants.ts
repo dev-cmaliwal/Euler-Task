@@ -1,5 +1,6 @@
 export const PRECISION_VALUE = 12;
 export const DEFAULT_SWAP_VALUE = 0;
+export const DEFAULT_ADDRESS = "";
 
 export const wallets = [{ walletName: "metamask" }];
 
