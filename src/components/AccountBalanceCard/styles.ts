@@ -18,4 +18,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "30px",
     textAlign: "center",
   },
+  cardContent: {
+    minHeight: "190px",
+  },
 }));
