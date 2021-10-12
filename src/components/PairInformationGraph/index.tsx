@@ -1,5 +1,6 @@
-import Box from "@material-ui/core/Box";
 import React, { useMemo } from "react";
+import moment from "moment";
+import Box from "@material-ui/core/Box";
 import {
   Tooltip,
   AreaChart,
@@ -9,7 +10,6 @@ import {
   Area,
   CartesianGrid,
 } from "recharts";
-import moment from "moment";
 import { GraphData } from "../../interfaces";
 import { useStyles } from "./styles";
 
