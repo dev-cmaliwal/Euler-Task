@@ -5,14 +5,21 @@ export const DEFAULT_ADDRESS = "";
 export const wallets = [{ walletName: "metamask" }];
 
 export const networkId = 3;
-export const apiKey = "d44f7633-cf88-4e9d-867b-25d07d06ee12";
+export const onBoardAPIKey = "c11523ce-9b7c-4bbe-86b2-b9f5f9f2c80a";
 
+export const daiAddress = "0xad6d458402f60fd3bd25163575031acdce07538d";
+export const ETHDAIPairAddress = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
+
+export const ether = "ether";
+export const mwei = "mwei";
+
+export const decimalPlaces = "18";
 export const daiAddressMainnet = "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11";
 
-export const apolloClientURL =
+export const uniswapSubgraphURL =
   "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2";
 
-export const graphDataQuery = `{
+export const pairGraphDataQuery = `{
     pairDayDatas(first: 70, orderBy: date, orderDirection: desc,
     where: {
       pairAddress: "${daiAddressMainnet}"
@@ -22,7 +29,7 @@ export const graphDataQuery = `{
     }
   }`;
 
-export const pairDetailsQuery = `{
+export const pairInformationQuery = `{
     pair(id: "${daiAddressMainnet}"){
     id,
     token0 {
@@ -39,7 +46,7 @@ export const pairDetailsQuery = `{
     reserveUSD,
   }}`;
 
-export const pastSwapsQuery = `{
+export const swapDataQuery = `{
     swaps(where : {
       pair: "${daiAddressMainnet}"}
       orderBy: timestamp,
