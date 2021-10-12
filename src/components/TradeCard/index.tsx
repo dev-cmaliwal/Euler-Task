@@ -47,6 +47,7 @@ const TradeCard: React.FC = () => {
     if (exchangeAmount) {
       setLoading(true);
       await convertEthToDai(exchangeAmount, userData.address);
+      setExchangeAmount("");
       setLoading(false);
       getEthAndDaiBalance(userData);
     } else {
@@ -93,6 +94,7 @@ const TradeCard: React.FC = () => {
               className={styles.textField}
               onChange={(e) => onChangeHandler(e)}
               disabled={userData.address === DEFAULT_ADDRESS}
+              value={exchangeAmount}
             />
             <Button
               variant="contained"
