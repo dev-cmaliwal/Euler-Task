@@ -1,12 +1,7 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { PastSwap } from "../../interfaces";
-import { useStyles } from "./styles";
-import { PRECISION_VALUE } from "../../constants";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,6 +9,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { PastSwap } from "../../interfaces";
+import { PRECISION_VALUE } from "../../constants";
+import { useStyles } from "./styles";
 
 interface Props {
   data: Array<PastSwap>;
