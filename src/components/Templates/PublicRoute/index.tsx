@@ -1,18 +1,22 @@
 import React from "react";
 import Header from "../Header";
+import ErrorMetaMaskDialog from "../../MetamaskErrorDialog";
 import { useStyles } from "./styles";
 
-const PublicRoute = (props: {
+interface Props {
   children: React.ReactNode;
   pageBackgroundColor?: String;
-}) => {
+}
+
+const PublicRoute: React.FC<Props> = ({ children, pageBackgroundColor }) => {
   const styles = useStyles();
   return (
     <>
       <Header />
-      <div className={styles.pageContainer + " " + props.pageBackgroundColor}>
-        {props.children}
+      <div className={styles.pageContainer + " " + pageBackgroundColor}>
+        {children}
       </div>
+      <ErrorMetaMaskDialog />
     </>
   );
 };
