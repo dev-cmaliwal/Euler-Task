@@ -5,11 +5,11 @@ interface UserInitialState {
   address: string;
   appNetworkId: number;
   balance: string;
-  daiBalance: string;
-  ethBalance: string;
+  daiBalance: string | undefined;
+  ethBalance: string | undefined;
   mobileDevice: boolean;
   network: number;
-  wallet: any;
+  wallet: object | undefined;
 }
 
 const initialState = {
@@ -27,7 +27,10 @@ const UserDataReducer = createSlice({
   name: "user",
   initialState,
   reducers: {
-    connectWallet: (state, action: PayloadAction<UserInitialState>) => {
+    connectWallet: (
+      state: UserInitialState,
+      action: PayloadAction<UserInitialState>
+    ) => {
       state.address = action.payload.address;
       state.appNetworkId = action.payload.appNetworkId;
       state.balance = action.payload.balance;
@@ -37,7 +40,7 @@ const UserDataReducer = createSlice({
       state.network = action.payload.network;
       state.wallet = action.payload.wallet;
     },
-    disconnectWallet: (state) => {
+    disconnectWallet: (state: UserInitialState) => {
       state.address = DEFAULT_ADDRESS;
       state.appNetworkId = 0;
       state.balance = "0";
