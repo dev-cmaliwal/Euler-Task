@@ -1,13 +1,8 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import { PairData } from "../../interfaces";
-import { useStyles } from "./styles";
-import { PRECISION_VALUE } from "../../constants";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,6 +10,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { PairData } from "../../interfaces";
+import { PRECISION_VALUE } from "../../constants";
+import { useStyles } from "./styles";
 
 interface Props {
   data: PairData | undefined;

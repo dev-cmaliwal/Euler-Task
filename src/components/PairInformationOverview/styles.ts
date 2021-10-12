@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     overflowY: "auto",
   },
   listContainer: {
+    padding: "0px",
     fontSize: "14px",
     flexWrap: "wrap",
     marginTop: "20px",
