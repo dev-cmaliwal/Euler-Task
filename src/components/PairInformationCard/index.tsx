@@ -7,10 +7,7 @@ import PairInformationGraph from "../PairInformationGraph";
 import TabPanel from "@material-ui/lab/TabPanel";
 import TabContext from "@material-ui/lab/TabContext";
 import { GraphData, PairData, PastSwap } from "../../interfaces";
-import { GRAPH_DUMMY_DATA } from "./data/graphData";
-import { PAIR_DUMMY_DATA } from "./data/pairData";
 import PairOverview from "../PairInformationOverview";
-import { SWAP_DUMMY_DATA } from "./data/pastSwapData";
 import PairInformationSwapData from "../PairInformationSwapData";
 import { useStyles } from "./style";
 import {
