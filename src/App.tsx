@@ -10,15 +10,13 @@ const darkTheme = createTheme({
   },
 });
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <>
-      <Provider store={store}>
-        <ThemeProvider theme={darkTheme}>
-          <Home />
-        </ThemeProvider>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <ThemeProvider theme={darkTheme}>
+        <Home />
+      </ThemeProvider>
+    </Provider>
   );
 };
 
