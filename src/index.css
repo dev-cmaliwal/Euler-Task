@@ -23,7 +23,6 @@ input[type="number"] {
 }
 
 :root {
-  /* --primary : #01A781; */
   --primary: #f50057;
   --secondary: #102331;
   --tertiary: #172d3e;
@@ -63,4 +62,14 @@ input[type="number"] {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+input:disabled,
+button:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+}
+
+.bn-onboard-modal{
+  z-index: 1;
 }
