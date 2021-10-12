@@ -1,36 +1,52 @@
+import React from "react";
+import { FaWallet } from "react-icons/fa";
+import { TiCancel } from "react-icons/ti";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@mui/material/Typography";
-import { FaWallet } from "react-icons/fa";
-import { TiCancel } from "react-icons/ti";
-import { DEFAULT_ADDRESS } from "../../../constants";
+import connectUserWallet from "../../../utilities/userLogin";
+import { getETHAmount, getDAIAmount } from "../../../utilities/userBalance";
+import { AccountDetails } from "../../../interfaces";
+import { daiAddress, decimalPlaces, DEFAULT_ADDRESS } from "../../../constants";
 import {
   connectWallet,
   disconnectWallet,
 } from "../../../redux/reducers/UserDataReducer";
 import { useAppDispatch, useAppSelector } from "../../../redux/utilities/hooks";
 
-const Header = () => {
+const Header: React.FC = () => {
   const userData = useAppSelector((state) => state.userData);
   const dispatch = useAppDispatch();
+  const userWallet = connectUserWallet();
 
-  const handleConnectWallet = () => {
-    const newState = {
-      address: "dasdasddwr3234345efsxe5t6",
-      appNetworkId: 0,
-      balance: "0",
-      daiBalance: "10",
-      ethBalance: "10",
-      mobileDevice: false,
-      network: 0,
-      wallet: {},
+  const handleConnectWallet = async () => {
+    const getEthAndDaiBalance = async (userAccountDetails: AccountDetails) => {
+      const ethBalance = await getETHAmount();
+      const daiBalance = await getDAIAmount(
+        userAccountDetails.address,
+        daiAddress,
+        decimalPlaces
+      );
+      const detail = { ...userAccountDetails, ethBalance, daiBalance };
+      dispatch(connectWallet(detail));
     };
-    dispatch(connectWallet(newState));
+
+    if (userWallet) {
+      await userWallet.walletSelect();
+      if (!userWallet.getState().address && userWallet.getState().wallet.name) {
+        await userWallet.walletCheck();
+      }
+      if (userWallet.getState().address) {
+        const accountDetails = await userWallet.getState();
+        await getEthAndDaiBalance(accountDetails);
+      }
+    }
   };
 
   const handledisconnectWallet = () => {
+    userWallet?.walletReset();
     dispatch(disconnectWallet());
   };
 
