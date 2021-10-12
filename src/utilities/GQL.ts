@@ -1,20 +1,20 @@
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import {
-  graphDataQuery,
-  pairDetailsQuery,
-  pastSwapsQuery,
-  apolloClientURL,
+  pairGraphDataQuery,
+  pairInformationQuery,
+  swapDataQuery,
+  uniswapSubgraphURL,
 } from "../constants";
 
 export const apolloClientInstance = new ApolloClient({
-  uri: `${apolloClientURL}`,
+  uri: `${uniswapSubgraphURL}`,
   cache: new InMemoryCache(),
 });
 
 export const getRecentSwapDetails = async () => {
   try {
     const { data } = await apolloClientInstance.query({
-      query: gql(pastSwapsQuery),
+      query: gql(swapDataQuery),
     });
     return data.swaps;
   } catch (e) {
@@ -26,7 +26,7 @@ export const getRecentSwapDetails = async () => {
 export const getUniswapStatisctics = async () => {
   try {
     const { data } = await apolloClientInstance.query({
-      query: gql(graphDataQuery),
+      query: gql(pairGraphDataQuery),
     });
     return data.pairDayDatas;
   } catch (e) {
@@ -38,7 +38,7 @@ export const getUniswapStatisctics = async () => {
 export const getPairData = async () => {
   try {
     const { data } = await apolloClientInstance.query({
-      query: gql(pairDetailsQuery),
+      query: gql(pairInformationQuery),
     });
     return data.pair;
   } catch (e) {
