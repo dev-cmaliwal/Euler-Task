@@ -2,14 +2,14 @@ import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
-import { Route, Trade } from "@uniswap/sdk";
-import { useStyles } from "./styles";
 import {
   DEFAULT_ADDRESS,
   DEFAULT_SWAP_VALUE,
   PRECISION_VALUE,
 } from "../../constants";
 import { useAppSelector } from "../../redux/utilities/hooks";
+import { Route, Trade } from "@uniswap/sdk";
+import { useStyles } from "./styles";
 
 interface Props {
   route?: Route | undefined;
@@ -45,6 +45,11 @@ const TradeDetails: React.FC<Props> = ({ route, trade }) => {
         {trade?.nextMidPrice
           ? trade.nextMidPrice.toSignificant(PRECISION_VALUE)
           : DEFAULT_SWAP_VALUE}
+      </ListItem>
+      <ListItem className={styles.listItem}>
+        <Typography component="span">
+          Note: Slipage is considered to be @0.5%
+        </Typography>
       </ListItem>
     </List>
   ) : (
