@@ -44,3 +44,14 @@ export interface PairData {
   reserveETH: string;
   reserveUSD: string;
 }
+
+export interface AccountDetails {
+  address: string;
+  appNetworkId: number;
+  balance: string;
+  daiBalance?: string;
+  ethBalance?: string;
+  mobileDevice: boolean;
+  network: number;
+  wallet: object | undefined;
+}
