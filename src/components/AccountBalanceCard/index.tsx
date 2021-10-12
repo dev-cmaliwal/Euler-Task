@@ -1,13 +1,14 @@
-import { Typography } from "@material-ui/core";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import Typography from "@material-ui/core/Typography";
 import { PRECISION_VALUE } from "../../constants";
 import { useAppSelector } from "../../redux/utilities/hooks";
 import { useStyles } from "./styles";
 
-const AccountBalanceCard = () => {
+const AccountBalanceCard: React.FC = () => {
   const styles = useStyles();
   const userData = useAppSelector((state) => state.userData);
 
@@ -21,7 +22,7 @@ const AccountBalanceCard = () => {
               <>
                 <Box>
                   <span>Address: </span>
-                  <p>{userData.address}</p>
+                  <h3 className={styles.addressText}>{userData.address}</h3>
                 </Box>
                 <Box alignItems="center" className={styles.imageIconContainer}>
                   <img
