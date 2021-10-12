@@ -5,22 +5,50 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { DEFAULT_ADDRESS } from "../../constants";
-import { useAppSelector } from "../../redux/utilities/hooks";
 import TradeDetails from "../TradeDetails";
+import { daiAddress, decimalPlaces, DEFAULT_ADDRESS } from "../../constants";
+import { AccountDetails, PricingData } from "../../interfaces";
+import {
+  fetchPricingDetails,
+  convertEthToDai,
+} from "../../utilities/tradeFunctions";
 import { amountValidation } from "../../utilities/validation";
+import { getETHAmount, getDAIAmount } from "../../utilities/userBalance";
+import { useAppDispatch, useAppSelector } from "../../redux/utilities/hooks";
+import { connectWallet } from "../../redux/reducers/UserDataReducer";
+import { Route, Trade } from "@uniswap/sdk";
 import { useStyles } from "./styles";
 
-const SwapModuleCard = () => {
+const TradeCard: React.FC = () => {
   const styles = useStyles();
   const userData = useAppSelector((state) => state.userData);
-  const [exchangeAmount, setExchangeAmount] = useState("" as string);
+  const dispatch = useAppDispatch();
+
+  const [exchangeAmount, setExchangeAmount] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [route, setRoute] = useState<Route>();
+  const [trade, setTrade] = useState<Trade>();
 
-  const submitHandler = () => {
-    console.log(exchangeAmount);
+  const getEthAndDaiBalance = async (userAccountDetails: AccountDetails) => {
+    const ethBalance = await getETHAmount();
+    const daiBalance = await getDAIAmount(
+      userAccountDetails.address,
+      daiAddress,
+      decimalPlaces
+    );
+    const detail = { ...userAccountDetails, ethBalance, daiBalance };
+    dispatch(connectWallet(detail));
+  };
+
+  const submitHandler = async () => {
+    if (exchangeAmount) {
+      await convertEthToDai(exchangeAmount, userData.address);
+      getEthAndDaiBalance(userData);
+    } else {
+      setError(true);
+      setErrorMessage("Amount cannot be empty");
+    }
   };
 
   const onChangeHandler = async (
@@ -34,7 +62,11 @@ const SwapModuleCard = () => {
     } else {
       setError(false);
       setErrorMessage("");
-      
+      const { route, trade }: PricingData = await fetchPricingDetails(
+        e.target.value
+      );
+      setRoute(route);
+      setTrade(trade);
     }
   };
 
@@ -67,14 +99,11 @@ const SwapModuleCard = () => {
               Exchange With DAI
             </Button>
           </Box>
-          <TradeDetails />
-          <Typography component="span">
-            Note: Slipage is considered to be @0.5%
-          </Typography>
+          <TradeDetails route={route} trade={trade} />
         </CardContent>
       </Card>
     </Box>
   );
 };
 
-export default SwapModuleCard;
+export default TradeCard;
