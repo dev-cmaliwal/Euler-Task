@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -6,16 +7,16 @@ import PairInformationCard from "../../components/PairInformationCard";
 import SwapModuleCard from "../../components/TradeCard";
 import PublicRoute from "../../components/Templates/PublicRoute";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <PublicRoute pageBackgroundColor="bg-secondary">
       <Box>
         <Container>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={7}>
               <PairInformationCard />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={5}>
               <AccountBalanceCard />
               <SwapModuleCard />
             </Grid>
