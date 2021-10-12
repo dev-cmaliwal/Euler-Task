@@ -37,4 +37,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "var(--secondary) !important",
     backgroundImage: "none !important",
   },
+  loading: {
+    color: "white",
+  },
 }));

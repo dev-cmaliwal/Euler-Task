@@ -42,4 +42,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: "25px",
     marginTop: "25px",
   },
+  loading: {
+    color: "white",
+  },
 }));

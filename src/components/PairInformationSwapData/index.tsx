@@ -79,7 +79,7 @@ const PastSwaps: React.FC<Props> = ({ data }) => {
         ))
       ) : (
         <Box className={styles.loadingContainer}>
-          <CircularProgress />
+          <CircularProgress className={styles.loading} size="35px" />
         </Box>
       )}
     </Box>

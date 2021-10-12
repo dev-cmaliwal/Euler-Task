@@ -100,7 +100,7 @@ const PairOverview: React.FC<Props> = ({ data }) => {
         </List>
       ) : (
         <Box className={styles.loadingWrapper}>
-          <CircularProgress />
+          <CircularProgress className={styles.loading} size="35px" />
         </Box>
       )}
     </Box>
