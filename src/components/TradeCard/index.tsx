@@ -9,12 +9,15 @@ import Typography from "@material-ui/core/Typography";
 import { DEFAULT_ADDRESS } from "../../constants";
 import { useAppSelector } from "../../redux/utilities/hooks";
 import TradeDetails from "../TradeDetails";
+import { amountValidation } from "../../utilities/validation";
 import { useStyles } from "./styles";
 
 const SwapModuleCard = () => {
   const styles = useStyles();
   const userData = useAppSelector((state) => state.userData);
   const [exchangeAmount, setExchangeAmount] = useState("" as string);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const submitHandler = () => {
     console.log(exchangeAmount);
@@ -24,6 +27,15 @@ const SwapModuleCard = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setExchangeAmount(e.target.value);
+    const amountError = amountValidation(e.target.value, userData.ethBalance);
+    if (amountError) {
+      setError(true);
+      setErrorMessage(amountError);
+    } else {
+      setError(false);
+      setErrorMessage("");
+      
+    }
   };
 
   return (
@@ -38,7 +50,9 @@ const SwapModuleCard = () => {
               id="outlined-basic"
               type="number"
               fullWidth
+              error={error}
               color="secondary"
+              helperText={errorMessage}
               inputProps={{ min: 0 }}
               className={styles.textField}
               onChange={(e) => onChangeHandler(e)}
@@ -47,7 +61,7 @@ const SwapModuleCard = () => {
             <Button
               variant="contained"
               className={"btn-primary " + styles.submitBtn}
-              disabled={userData.address === DEFAULT_ADDRESS}
+              disabled={userData.address === DEFAULT_ADDRESS || error}
               onClick={submitHandler}
             >
               Exchange With DAI
