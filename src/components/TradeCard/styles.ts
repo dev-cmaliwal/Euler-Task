@@ -29,4 +29,7 @@ export const useStyles = makeStyles(() => ({
   container: {
     marginTop: "15px",
   },
+  loading: {
+    color: "white",
+  },
 }));

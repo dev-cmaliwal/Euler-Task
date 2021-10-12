@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import TradeDetails from "../TradeDetails";
 import { daiAddress, decimalPlaces, DEFAULT_ADDRESS } from "../../constants";
@@ -26,6 +27,7 @@ const TradeCard: React.FC = () => {
 
   const [exchangeAmount, setExchangeAmount] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [route, setRoute] = useState<Route>();
   const [trade, setTrade] = useState<Trade>();
@@ -43,7 +45,9 @@ const TradeCard: React.FC = () => {
 
   const submitHandler = async () => {
     if (exchangeAmount) {
+      setLoading(true);
       await convertEthToDai(exchangeAmount, userData.address);
+      setLoading(false);
       getEthAndDaiBalance(userData);
     } else {
       setError(true);
@@ -96,7 +100,11 @@ const TradeCard: React.FC = () => {
               disabled={userData.address === DEFAULT_ADDRESS || error}
               onClick={submitHandler}
             >
-              Exchange With DAI
+              {loading ? (
+                <CircularProgress className={styles.loading} size="35px" />
+              ) : (
+                "Exchange With DAI"
+              )}
             </Button>
           </Box>
           <TradeDetails route={route} trade={trade} />
