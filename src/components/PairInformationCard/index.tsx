@@ -2,19 +2,18 @@ import { useState, useEffect } from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Card from "@material-ui/core/Card";
-import Box from "@material-ui/core/Box";
 import PairInformationGraph from "../PairInformationGraph";
 import TabPanel from "@material-ui/lab/TabPanel";
 import TabContext from "@material-ui/lab/TabContext";
-import { GraphData, PairData, PastSwap } from "../../interfaces";
 import PairOverview from "../PairInformationOverview";
 import PairInformationSwapData from "../PairInformationSwapData";
-import { useStyles } from "./style";
+import { GraphData, PairData, PastSwap } from "../../interfaces";
 import {
   getPairData,
   getRecentSwapDetails,
   getUniswapStatisctics,
 } from "../../utilities/GQL";
+import { useStyles } from "./style";
 
 const PairInformationCard = () => {
   const styles = useStyles();
